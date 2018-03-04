@@ -1,41 +1,72 @@
-class Node {
-    int data;
-    Node leftChild;
-    Node rightChild;
+public class Tree {
 
-    Node (int data) {
-        this.data = data;
-        leftChild = rightChild = null;
+    class Node {
+        int data;
+        Node leftChild;
+        Node rightChild;
+
+        Node (int data) {
+            this.data = data;
+            leftChild = rightChild = null;
+        }
     }
-}
 
-class Tree {
     Node root;
 
-    Tree () {
+    public Tree () {
         root = null;
     }
 
-    public void insertNode (int data) {
-        root = new Node(data);
+    public void insert (int data){
+        root = insertNode(root, data);
     }
 
-    public Node insert (Node node) {
-        if (node.data <= root.data) {
-            if (leftChild == null)
-                leftChild = node;
-            else
-                leftChild.insert(node);
+    public Node insertNode (Node node, int key){
+        if (node == null){
+            node = new Node(key);
+            return node;
         }
-        else {
-            if (rightChild == null)
-                rightChild = node;
-            else
-                rightChild.insert(node);
+
+        if (key <= node.data){
+            node.leftChild = insertNode(node.leftChild, key);
+        } else if (key > root.data){
+            node.rightChild = insertNode(node.rightChild, key);
         }
+
+        return node;
     }
-}
+
+    public Node find(int data){
+        Node node = findNode(root, data);
+        return node;
+    }
+
+    public Node findNode (Node node, int data){
+        if (data == node.data){
+            return node;
+        }
+
+        if (data <= node.data){
+            return findNode(node.leftChild, data);
+        } else if (data > node.data){
+            return findNode(node.rightChild, data);
+        }
+
+        return null;
+    }
+
+    public static void main (String [] args){
+        int [] data = {3,7,1,8,4,9,2,4,6,1};
+
+        Tree binaryTree = new Tree();
+
+        for (int i = 0; i < data.length; i++){
+            binaryTree.insert(data[i]);
+        }
+
+        Node node = binaryTree.find(9);
+        System.out.println(node.data);
+    }
 
 
-public class Main {
 }
