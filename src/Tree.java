@@ -56,7 +56,7 @@ public class Tree {
     }
 
     public static void main (String [] args){
-        int [] data = {3,7,1,8,4,9,2,4,6,1};
+        int [] data = {1,2,3,4,5,6,7,8,9,10};
 
         Tree binaryTree = new Tree();
 
