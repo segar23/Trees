@@ -1,5 +1,6 @@
 public class Tree {
 
+    //Class Node to store data and the children nodes
     class Node {
         int data;
         Node leftChild;
@@ -13,14 +14,17 @@ public class Tree {
 
     Node root;
 
+    //Tree class constructor
     public Tree () {
         root = null;
     }
 
+    //Accessible insert method to call the recursive one
     public void insert (int data){
         root = insertNode(root, data);
     }
 
+    //Recursive insert method to define the nodes
     public Node insertNode (Node node, int key){
         if (node == null){
             node = new Node(key);
@@ -36,11 +40,13 @@ public class Tree {
         return node;
     }
 
+    //Accessible find method to call the recursive one
     public Node find(int data){
         Node node = findNode(root, data);
         return node;
     }
 
+    //Recursive find method to explore the children nodes
     public Node findNode (Node node, int data){
         if (data == node.data){
             return node;
