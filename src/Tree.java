@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class Tree {
 
     //Class Node to store data and the children nodes
@@ -62,17 +64,20 @@ public class Tree {
     }
 
     public static void main (String [] args){
-        int [] data = {1,2,3,4,5,6,7,8,9,10};
+        Random ran = new Random();
+
+        int [] data = new int[10];
+        System.out.println("Random Array");
+        for (int i = 0; i < data.length; i++) {
+            data[i] = ran.nextInt(100);
+            System.out.print(data[i]);
+            System.out.print(" ");
+        }
 
         Tree binaryTree = new Tree();
 
         for (int i = 0; i < data.length; i++){
             binaryTree.insert(data[i]);
         }
-
-        Node node = binaryTree.find(9);
-        System.out.println(node.data);
     }
-
-
 }
