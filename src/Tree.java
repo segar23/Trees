@@ -63,6 +63,21 @@ public class Tree {
         return null;
     }
 
+    public void print () {
+        printInOrder(root);
+    }
+
+    public void printInOrder (Node node) {
+        if (node == null)
+            return;
+
+        printInOrder(node.leftChild);
+
+        System.out.print(node.data + " ");
+
+        printInOrder(node.rightChild);
+    }
+
     public static void main (String [] args){
         Random ran = new Random();
 
@@ -74,10 +89,15 @@ public class Tree {
             System.out.print(" ");
         }
 
+        System.out.println();
+
         Tree binaryTree = new Tree();
 
         for (int i = 0; i < data.length; i++){
             binaryTree.insert(data[i]);
         }
+
+        System.out.println("Tree In Order");
+        binaryTree.print();
     }
 }
