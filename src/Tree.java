@@ -1,4 +1,5 @@
 import java.util.Random;
+import java.util.Scanner;
 
 public class Tree {
 
@@ -35,7 +36,7 @@ public class Tree {
 
         if (key <= node.data){
             node.leftChild = insertNode(node.leftChild, key);
-        } else if (key > root.data){
+        } else if (key > node.data){
             node.rightChild = insertNode(node.rightChild, key);
         }
 
@@ -50,6 +51,9 @@ public class Tree {
 
     //Recursive find method to explore the children nodes
     public Node findNode (Node node, int data){
+        if (node == null)
+            return null;
+
         if (data == node.data){
             return node;
         }
@@ -64,7 +68,15 @@ public class Tree {
     }
 
     public void print () {
+        System.out.println("Tree In-Order");
         printInOrder(root);
+        System.out.println();
+        System.out.println("Tree Pre-Order");
+        printPreOrder(root);
+        System.out.println();
+        System.out.println("Tree Post-Order");
+        printPostOder(root);
+        System.out.println();
     }
 
     public void printInOrder (Node node) {
@@ -78,10 +90,33 @@ public class Tree {
         printInOrder(node.rightChild);
     }
 
+    public void printPreOrder (Node node) {
+        if (node == null)
+            return;
+
+        System.out.print(node.data + " ");
+
+        printPreOrder(node.leftChild);
+
+        printPreOrder(node.rightChild);
+    }
+
+    public void printPostOder (Node node) {
+        if (node == null)
+            return;
+
+        printPostOder(node.leftChild);
+
+        printPostOder(node.rightChild);
+
+        System.out.print(node.data + " ");
+    }
+
     public static void main (String [] args){
         Random ran = new Random();
 
         int [] data = new int[10];
+
         System.out.println("Random Array");
         for (int i = 0; i < data.length; i++) {
             data[i] = ran.nextInt(100);
@@ -97,7 +132,17 @@ public class Tree {
             binaryTree.insert(data[i]);
         }
 
-        System.out.println("Tree In Order");
+        System.out.println("Tree Printing:");
         binaryTree.print();
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Type a number to search: ");
+        int item = scanner.nextInt();
+        Node findItem = binaryTree.find(item);
+
+        if (findItem == null)
+            System.out.println("Item Not Found");
+        else
+            System.out.print("Item " + findItem.data + " Found");
     }
 }
